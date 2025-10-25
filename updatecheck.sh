@@ -18,47 +18,26 @@ if [ -z "$PAGE_CONTENT" ]; then
     exit 1
 fi
 
-# Extract the Linux bedrock server download link from the embedded Next.js data
+# Extract the Linux bedrock server download link by scanning for ZIP URLs
 CURRENT_LINK=$(printf '%s' "$PAGE_CONTENT" | python3 - <<'PY'
-import json
+import re
 import sys
 
 html = sys.stdin.read()
-start_tag = '<script id="__NEXT_DATA__" type="application/json">'
-end_tag = '</script>'
-start = html.find(start_tag)
-if start == -1:
-    sys.exit(1)
-start += len(start_tag)
-end = html.find(end_tag, start)
-if end == -1:
-    sys.exit(1)
-try:
-    data = json.loads(html[start:end])
-except json.JSONDecodeError:
-    sys.exit(1)
 
-def find_download(value):
-    if isinstance(value, str):
-        if "bedrockdedicatedserver" in value and "bin-linux" in value and value.endswith('.zip'):
-            return value
-        return None
-    if isinstance(value, dict):
-        for item in value.values():
-            result = find_download(item)
-            if result:
-                return result
-    elif isinstance(value, list):
-        for item in value:
-            result = find_download(item)
-            if result:
-                return result
-    return None
+# Look for any https URLs that reference a bedrock-server zip
+urls = re.findall(r'https://[^"\\s]*bedrock-server-[0-9][0-9.]*\\.zip', html)
+linux_urls = [url for url in urls if 'linux' in url.lower()]
 
-link = find_download(data)
+# Prefer links that explicitly point to the bin-linux directory, but fall back to any linux link
+preferred = [url for url in linux_urls if 'bin-linux' in url.lower()]
+
+link = (preferred or linux_urls or urls)
+
 if not link:
     sys.exit(1)
-print(link)
+
+print(link[0])
 PY
 )
 
