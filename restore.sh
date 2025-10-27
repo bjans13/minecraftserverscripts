@@ -1,7 +1,11 @@
 #!/bin/bash
+
+# Configuration variables
 BACKUP_DIR="/minecraft/backups"
+# Get most recent backup file using ls -t (sort by time) and head
 LATEST_BACKUP=$(ls -t "$BACKUP_DIR" | head -n 1)
 
+# Safety check: Ensure we have a backup before proceeding
 if [ -z "$LATEST_BACKUP" ]; then
     echo "No backup found! Restore aborted."
     exit 1
