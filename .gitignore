@@ -1,0 +1,30 @@
+# Minecraft server backups
+*.tar.gz
+*.zip
+
+# Server files
+bedrock_server
+bedrock_server.zip
+bedrock-server-*.zip
+
+# Server generated files
+*.log
+*.log.*
+worlds/
+server.properties
+permissions.json
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*~
+
+# Configuration files that might contain sensitive information
+config.json
+*.pem
+*.key

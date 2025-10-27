@@ -6,16 +6,17 @@ Scripts to automate the management and updating of an Ubuntu Linux Minecraft Bed
 These scripts handle automated backups, updates, and restoration of a Minecraft Bedrock server installation.
 
 ### Features
-- Automated backup system (retains last 30 days)
+- Automated backup system (retains last 65 days)
 - Server update automation
 - Configuration and world restoration
 - Systemd service integration
+- Integration with Discord bot for version management
 
 ## Scripts Description
 
 ### backup.sh
 - Creates timestamped backups of the server
-- Automatically removes backups older than 30 days
+- Automatically removes backups older than 65 days
 - Includes worlds and server configurations
 - Excludes backup directory to prevent recursive backups
 
@@ -31,13 +32,13 @@ These scripts handle automated backups, updates, and restoration of a Minecraft 
 - Handles server restart process
 
 ## Important Notes
-- These scripts are designed as supplementary backup solution (30-day retention)
+- These scripts are designed as supplementary backup solution (65-day retention)
 - Requires proper systemd service setup for Minecraft
 - Server files expected in `/minecraft/bedrock/` directory
 - Backup storage in `/minecraft/backups/`
 
-# SCRIPT updatecheck.sh NOT WORKING! - Movded to archive
-unable to pull the correct download link from the page and surrendered. I resorted to handeling this task paired with my V.A.L.K.Y.R.I.E. discord bot, in my valkyrie repo. I find the new patch number and give to V.A.L.K.Y.R.I.E. on discord to update bedrock_last_link.txt
+## Update Check Process
+The original `updatecheck.sh` script has been archived due to difficulties with automated link extraction. The update process now utilizes the V.A.L.K.Y.R.I.E. Discord bot (see [bjans13/VALKYRIE](https://github.com/bjans13/VALKYRIE)) for version management. This provides a more reliable and controlled way to update the server version.
 
 # V.A.L.K.Y.R.I.E. handler [bjans13/VALKYRIE](https://github.com/bjans13/VALKYRIE)
 Here is the handler within the bot used to make the update process easier without tearing down the bedrock_last_link.txt method in case I find a differnt way to feed it the patch number down the road.

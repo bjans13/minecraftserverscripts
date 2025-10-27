@@ -16,7 +16,7 @@ tar --exclude="/minecraft/backups" -czvf "$BACKUP_DIR/minecraft_backup_$TIMESTAM
 echo "Backup completed: $BACKUP_DIR/minecraft_backup_$TIMESTAMP.tar.gz"
 
 # Cleanup old backups
-# Keep only the last 30 days of backups using find command
-# -mtime +30: files modified more than 30 days ago
+# Keep only the last 65 days of backups using find command
+# -mtime +65: files modified more than 65 days ago
 # -delete: remove matching files
-find "$BACKUP_DIR" -type f -name "minecraft_backup_*.tar.gz" -mtime +30 -delete
+find "$BACKUP_DIR" -type f -name "minecraft_backup_*.tar.gz" -mtime +65 -delete
