@@ -1,45 +1,7 @@
-# Minecraft Bedrock Server Management Scripts
-
-Scripts to automate the management and updating of an Ubuntu Linux Minecraft Bedrock Server.
-
-## Overview
-These scripts handle automated backups, updates, and restoration of a Minecraft Bedrock server installation.
-
-### Features
-- Automated backup system (retains last 30 days)
-- Server update automation
-- Configuration and world restoration
-- Systemd service integration
-
-## Scripts Description
-
-### backup.sh
-- Creates timestamped backups of the server
-- Automatically removes backups older than 30 days
-- Includes worlds and server configurations
-- Excludes backup directory to prevent recursive backups
-
-### update.sh
-- Handles server version updates
-- Performs automatic backup before updating
-- Downloads and installs new server version
-- Restores worlds and configurations after update
-
-### restore.sh
-- Restores server configuration from latest backup
-- Preserves world data and permissions
-- Handles server restart process
-
-## Important Notes
-- These scripts are designed as supplementary backup solution (30-day retention)
-- Requires proper systemd service setup for Minecraft
-- Server files expected in `/minecraft/bedrock/` directory
-- Backup storage in `/minecraft/backups/`
-
 # SCRIPT updatecheck.sh NOT WORKING! - Movded to archive
 unable to pull the correct download link from the page and surrendered. I resorted to handeling this task paired with my V.A.L.K.Y.R.I.E. discord bot, in my valkyrie repo. I find the new patch number and give to V.A.L.K.Y.R.I.E. on discord to update bedrock_last_link.txt
 
-# V.A.L.K.Y.R.I.E. handler [bjans13/VALKYRIE](https://github.com/bjans13/VALKYRIE)
+## V.A.L.K.Y.R.I.E. handler
 Here is the handler within the bot used to make the update process easier without tearing down the bedrock_last_link.txt method in case I find a differnt way to feed it the patch number down the road.
 
 >     registerCommand({
@@ -86,15 +48,3 @@ Here is the handler within the bot used to make the update process easier withou
 >         }
 >       },
 >      });
-
-# TODO / Recommendations
-1. Add error logging to a dedicated log file
-2. Implement backup verification
-3. Add configuration file for paths and retention settings
-4. Include backup compression level options
-5. Add backup rotation strategy beyond simple date-based deletion
-6. Implement notification system for successful/failed operations
-7. Add checksum verification for downloaded server files
-8. Create a configuration backup separate from world backups
-9. Add server performance monitoring
-10. Implement automatic backup testing
