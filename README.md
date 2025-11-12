@@ -28,7 +28,7 @@ These scripts handle automated backups, updates, and restoration of a Minecraft 
 
 ### restore.sh
 - Restores server configuration from latest backup
-- Preserves world data and permissions
+- Preserves world data, including `/minecraft/bedrock/permissions.json`
 - Handles server restart process
 
 ## Important Notes

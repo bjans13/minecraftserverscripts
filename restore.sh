@@ -16,8 +16,10 @@ sudo systemctl stop minecraft
 
 echo "Restoring worlds, server.properties, and permissions.json from backup..."
 cd /minecraft/bedrock
-tar -xzvf "$BACKUP_DIR/$LATEST_BACKUP" -C /minecraft/bedrock --strip-components=1 ./server.properties ./worlds
-tar -xzvf "$BACKUP_DIR/$LATEST_BACKUP" -C /minecraft/bedrock/config/default --strip-components=3 ./config/default/permissions.json
+# Restore top-level configuration files and worlds directory, including permissions.json
+tar -xzvf "$BACKUP_DIR/$LATEST_BACKUP" -C /minecraft/bedrock --strip-components=1 ./server.properties ./permissions.json ./worlds
+# Restore legacy default permissions file location if present in the archive
+tar -xzvf "$BACKUP_DIR/$LATEST_BACKUP" -C /minecraft/bedrock/config/default --strip-components=3 ./config/default/permissions.json 2>/dev/null || true
 
 echo "Ensuring bedrock_server is executable..."
 chmod +x /minecraft/bedrock/bedrock_server
