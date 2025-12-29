@@ -14,10 +14,10 @@ fi
 echo "Stopping server..."
 sudo systemctl stop minecraft
 
-echo "Restoring worlds, server.properties, and permissions.json from backup..."
+echo "Restoring worlds, server.properties, permissions.json, and allowlist.json from backup..."
 cd /minecraft/bedrock
-# Restore top-level configuration files and worlds directory, including permissions.json
-tar -xzvf "$BACKUP_DIR/$LATEST_BACKUP" -C /minecraft/bedrock --strip-components=1 ./server.properties ./permissions.json ./worlds
+# Restore top-level configuration files and worlds directory, including permissions.json and allowlist.json
+tar -xzvf "$BACKUP_DIR/$LATEST_BACKUP" -C /minecraft/bedrock --strip-components=1 ./server.properties ./permissions.json ./allowlist.json ./worlds
 # Restore legacy default permissions file location if present in the archive
 tar -xzvf "$BACKUP_DIR/$LATEST_BACKUP" -C /minecraft/bedrock/config/default --strip-components=3 ./config/default/permissions.json 2>/dev/null || true
 
